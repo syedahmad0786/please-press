@@ -53,6 +53,41 @@ body.act-end {
   --face: #f4f0e6;
 }
 
+body.act-takeover {
+  --paper: #0c0b09;
+  --ink: #f4f0e6;
+  --button: #f4e6c4;
+  --face: #0c0b09;
+  --glow: #f4e6c4;
+}
+
+body.act-takeover #the-button {
+  width: min(70vw, 420px);
+  height: min(70vw, 420px);
+}
+
+body.act-os {
+  --paper: #0078d4;
+  --ink: #ffffff;
+  --mute: #d6ecff;
+  --button: #ffffff;
+  --face: #0078d4;
+}
+
+body.act-os::after {
+  content: "Installing Button 16.0  ·  do not unplug the museum";
+  position: fixed;
+  left: 8%;
+  right: 8%;
+  bottom: 18%;
+  z-index: 4;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-align: center;
+  pointer-events: none;
+}
+
 #field {
   position: fixed;
   inset: 0;
@@ -246,9 +281,13 @@ main {
   inset: 0;
   z-index: 12;
   background: color-mix(in srgb, var(--paper) 88%, transparent);
-  display: grid;
+  display: none;
   place-items: center;
   padding: 24px;
+}
+
+.ending:not([hidden]) {
+  display: grid;
 }
 
 .ending-inner {
@@ -311,6 +350,10 @@ main {
 }
 
 @media (max-width: 640px) {
+  #the-button {
+    width: 168px;
+    height: 168px;
+  }
   .museum-label {
     padding: 20px 18px 0;
   }
