@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>THE BUTTON.</title>
+    <meta name="description" content="A single beautiful button. First clicks are cute. Then it gets theatrical." />
+    <meta property="og:title" content="THE BUTTON." />
+    <meta property="og:description" content="Please press. Then keep pressing." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <canvas id="field"></canvas>
+    <div id="cracks"></div>
+    <header class="museum-label">
+      <p class="accession">FT–002</p>
+      <h1>THE BUTTON.</h1>
+      <p class="sub">Please do not lean on the glass.</p>
+    </header>
+    <main>
+      <button id="the-button" type="button" aria-label="The button">
+        <span class="face">·</span>
+      </button>
+      <p id="whisper" class="whisper"></p>
+    </main>
+    <aside id="counter" class="counter" hidden>
+      <span id="yours">0</span>
+      <small>yours</small>
+      <span class="sep">/</span>
+      <span id="global">—</span>
+      <small>everyone</small>
+    </aside>
+    <div id="dialogs"></div>
+    <div id="lore" class="lore" hidden></div>
+    <div id="ending" class="ending" hidden>
+      <div class="ending-inner">
+        <p class="ending-kicker">Act X</p>
+        <h2>You pressed it enough.</h2>
+        <p>The button is tired and proud. The museum will reset the room when you are ready.</p>
+        <button type="button" id="share-act">Keep this ending</button>
+        <button type="button" id="reset" class="ghost">Begin again, quietly</button>
+      </div>
+    </div>
+    <footer class="webring">
+      <a href="https://fun-toys.vercel.app">a Fun Toy</a>
+      <span class="dot">·</span>
+      <a href="https://cursorling.vercel.app">prev</a>
+      <a href="https://plot-armor.vercel.app">next</a>
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

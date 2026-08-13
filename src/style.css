@@ -1,0 +1,326 @@
+:root {
+  --paper: #f4f0e6;
+  --ink: #16140f;
+  --mute: #7a7364;
+  --button: #1c1a16;
+  --face: #f4f0e6;
+  --glow: transparent;
+  --shake: 0px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+body {
+  overflow: hidden;
+  transition: background 1.2s ease, color 1.2s ease;
+}
+
+body.act-warm {
+  --paper: #f3e6d2;
+}
+
+body.act-gold {
+  --paper: #1a1208;
+  --ink: #f4e6c4;
+  --mute: #b79a62;
+  --button: #f4e6c4;
+  --face: #1a1208;
+}
+
+body.act-void {
+  --paper: #050506;
+  --ink: #e8e4dc;
+  --mute: #8a8680;
+  --button: #ff3b3b;
+  --face: #050506;
+}
+
+body.act-end {
+  --paper: #f4f0e6;
+  --ink: #16140f;
+  --button: #16140f;
+  --face: #f4f0e6;
+}
+
+#field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#cracks {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    linear-gradient(118deg, transparent 49.6%, #16140f 49.6%, #16140f 50.1%, transparent 50.1%),
+    linear-gradient(12deg, transparent 60%, #16140f 60%, #16140f 60.35%, transparent 60.35%),
+    linear-gradient(72deg, transparent 30%, #16140f 30%, #16140f 30.25%, transparent 30.25%);
+  mix-blend-mode: multiply;
+  transition: opacity 1.4s ease;
+}
+
+body.cracked #cracks {
+  opacity: 0.35;
+}
+
+.museum-label {
+  position: relative;
+  z-index: 2;
+  padding: 28px 32px 0;
+  max-width: 28rem;
+}
+
+.accession {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--mute);
+  margin: 0 0 8px;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: clamp(28px, 4vw, 44px);
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+.sub {
+  margin: 8px 0 0;
+  color: var(--mute);
+  font-style: italic;
+}
+
+main {
+  position: relative;
+  z-index: 3;
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+  padding-bottom: 12vh;
+}
+
+#the-button {
+  width: 120px;
+  height: 120px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--button);
+  color: var(--face);
+  cursor: pointer;
+  box-shadow:
+    0 18px 40px color-mix(in srgb, var(--button) 28%, transparent),
+    0 0 0 12px color-mix(in srgb, var(--ink) 6%, transparent),
+    0 0 80px var(--glow);
+  transform: translate(var(--shake), 0) scale(var(--press, 1));
+  transition: background 0.6s ease, box-shadow 0.4s ease, width 0.8s ease, height 0.8s ease, border-radius 0.8s ease;
+  position: relative;
+}
+
+#the-button:active {
+  --press: 0.94;
+}
+
+#the-button .face {
+  font-size: 42px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+#the-button.wide {
+  width: 220px;
+  border-radius: 28px;
+}
+
+#the-button.huge {
+  width: 280px;
+  height: 160px;
+  border-radius: 18px;
+}
+
+.whisper {
+  position: absolute;
+  top: calc(50% + 92px);
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  min-height: 1.4em;
+  font-style: italic;
+  font-size: 22px;
+  letter-spacing: 0.02em;
+  text-align: center;
+  width: min(90vw, 28rem);
+}
+
+.counter {
+  position: fixed;
+  top: 28px;
+  right: 32px;
+  z-index: 4;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--mute);
+}
+
+.counter span {
+  color: var(--ink);
+  font-size: 18px;
+}
+
+.sep {
+  opacity: 0.4;
+}
+
+#dialogs {
+  position: fixed;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+}
+
+.sys {
+  pointer-events: auto;
+  position: absolute;
+  width: min(360px, 88vw);
+  background: #ece9e2;
+  color: #111;
+  border: 1px solid #111;
+  box-shadow: 6px 6px 0 #111;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  padding: 12px 12px 10px;
+}
+
+.sys header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.sys p {
+  margin: 0 0 12px;
+  line-height: 1.45;
+}
+
+.sys button {
+  font: inherit;
+  border: 1px solid #111;
+  background: #111;
+  color: #ece9e2;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.lore {
+  position: fixed;
+  left: 32px;
+  bottom: 72px;
+  z-index: 5;
+  max-width: 22rem;
+  font-size: 18px;
+  line-height: 1.45;
+  font-style: italic;
+}
+
+.ending {
+  position: fixed;
+  inset: 0;
+  z-index: 12;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.ending-inner {
+  max-width: 28rem;
+  text-align: center;
+}
+
+.ending-kicker {
+  font-family: "IBM Plex Mono", monospace;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: var(--mute);
+}
+
+.ending-inner h2 {
+  font-size: 42px;
+  margin: 8px 0 12px;
+}
+
+.ending-inner button {
+  font-family: "IBM Plex Mono", monospace;
+  margin: 8px 6px 0;
+  padding: 10px 16px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  cursor: pointer;
+}
+
+.ending-inner .ghost {
+  background: transparent;
+  color: var(--ink);
+}
+
+.webring {
+  position: fixed;
+  bottom: 18px;
+  left: 0;
+  right: 0;
+  z-index: 6;
+  text-align: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.webring a {
+  color: var(--mute);
+  text-decoration: none;
+}
+
+.webring a:hover {
+  color: var(--ink);
+}
+
+.dot {
+  margin: 0 8px;
+  color: var(--mute);
+}
+
+@media (max-width: 640px) {
+  .museum-label {
+    padding: 20px 18px 0;
+  }
+  .counter {
+    top: auto;
+    bottom: 52px;
+    right: 18px;
+  }
+  .lore {
+    left: 18px;
+    bottom: 96px;
+  }
+}
