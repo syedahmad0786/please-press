@@ -2,7 +2,8 @@
 
 A single beautiful button on a clean page. First clicks are cute. Then particles, sound, fake system messages, lore, and a small ceremony.
 
-Live: will be filled after deploy. Repo: https://github.com/syedahmad0786/please-press
+Live: https://please-press.vercel.app  
+Repo: https://github.com/syedahmad0786/please-press
 
 ## Run locally
 
