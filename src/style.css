@@ -209,10 +209,14 @@ main {
   z-index: 4;
   font-family: "IBM Plex Mono", monospace;
   font-size: 13px;
-  display: flex;
+  display: none;
   align-items: baseline;
   gap: 8px;
   color: var(--mute);
+}
+
+.counter:not([hidden]) {
+  display: flex;
 }
 
 .counter span {
