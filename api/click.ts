@@ -11,8 +11,13 @@ function memory(): Store {
   return g.__press;
 }
 
+function blobToken(): string | undefined {
+  return (globalThis as { process?: { env?: Record<string, string | undefined> } })
+    .process?.env?.BLOB_READ_WRITE_TOKEN;
+}
+
 async function readTotal(): Promise<number> {
-  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  const token = blobToken();
   if (token) {
     try {
       const { list } = await import("@vercel/blob");
@@ -35,7 +40,7 @@ async function readTotal(): Promise<number> {
 
 async function writeTotal(n: number): Promise<void> {
   memory().total = n;
-  if (!process.env.BLOB_READ_WRITE_TOKEN) return;
+  if (!blobToken()) return;
   try {
     const { put } = await import("@vercel/blob");
     await put("please-press.json", JSON.stringify({ total: n }), {
