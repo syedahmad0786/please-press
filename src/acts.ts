@@ -14,7 +14,17 @@ export const ACTS: Act[] = [
   { at: 3, name: "I", whisper: "again? alright.", face: "o" },
   { at: 10, name: "II", whisper: "particles. you did that.", face: "◦" },
   { at: 25, name: "II", whisper: "the room is paying attention.", face: "•" },
-  { at: 50, name: "III", whisper: "fifty is a real number.", face: "★", body: "act-warm" },
+  {
+    at: 80,
+    name: "III½",
+    whisper: "the room is now the button.",
+    face: "▣",
+    body: "act-takeover",
+    dialog: {
+      title: "DISPLAY",
+      body: "Gallery lighting has been reassigned to Object FT–002. Please remain seated.",
+    },
+  },
   {
     at: 100,
     name: "IV",
@@ -54,14 +64,14 @@ export const ACTS: Act[] = [
     buttonClass: "huge",
   },
   {
-    at: 1000,
-    name: "X",
-    whisper: "the room cracked. that was you.",
-    face: "!",
-    body: "act-void cracked",
+    at: 1200,
+    name: "X½",
+    whisper: "an update is ready. it is not.",
+    face: "↻",
+    body: "act-os",
     dialog: {
-      title: "SECURITY",
-      body: "Unscheduled ceremony in Gallery 2. Staff: do not interrupt the visitor.",
+      title: "System Update",
+      body: "Installing Button 16.0 (Theatrical). Do not unplug the museum.",
     },
   },
   {
