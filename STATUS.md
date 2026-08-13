@@ -1,5 +1,9 @@
 # please-press — STATUS
 
+## 2026-08-14 � premium studio look
+
+Enamel 3D button tilt, Motion One press, museum grain, logo/favicons. Overlay still uses :not([hidden]). Reduced motion disables heavy 3D. Webring: https://fun-toys-alpha.vercel.app
+
 ## 2026-08-13 — blob env
 
 - `/api/click` reads Blob token via `globalThis.process` so TypeScript no longer needs Node types. Persistence still uses Blob when the token is set, memory otherwise.

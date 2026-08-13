@@ -7,22 +7,35 @@
     <meta name="description" content="A single beautiful button. First clicks are cute. Then it gets theatrical." />
     <meta property="og:title" content="THE BUTTON." />
     <meta property="og:description" content="Please press. Then keep pressing." />
+    <meta property="og:image" content="/og.png" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <div class="studio-grain" aria-hidden="true"></div>
+    <div class="studio-vignette" aria-hidden="true"></div>
     <canvas id="field"></canvas>
     <div id="cracks"></div>
     <header class="museum-label">
       <p class="accession">FT–002</p>
-      <h1>THE BUTTON.</h1>
+      <div class="title-row">
+        <img class="mark" src="/logo.svg" width="44" height="44" alt="" />
+        <h1>THE BUTTON.</h1>
+      </div>
       <p class="sub">Please do not lean on the glass.</p>
     </header>
     <main>
-      <button id="the-button" type="button" aria-label="The button">
-        <span class="face">·</span>
-      </button>
+      <div class="plinth" id="plinth">
+        <button id="the-button" type="button" aria-label="The button">
+          <span class="dome" aria-hidden="true"></span>
+          <span class="rim" aria-hidden="true"></span>
+          <span class="face">·</span>
+        </button>
+      </div>
       <p id="whisper" class="whisper"></p>
     </main>
     <aside id="counter" class="counter" hidden>

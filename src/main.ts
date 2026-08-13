@@ -1,6 +1,8 @@
 import "./style.css";
+import { animate } from "motion";
 import { ACTS, actFor } from "./acts";
 import { clickSound, sting } from "./audio";
+import { bindTilt, reducedMotion } from "./studio";
 
 const KEY = "please-press:n";
 const button = document.querySelector<HTMLButtonElement>("#the-button")!;
@@ -123,6 +125,27 @@ async function pingGlobal() {
   }
 }
 
+function punchFace(): void {
+  if (reducedMotion()) return;
+  void animate(
+    face as HTMLElement,
+    { transform: ["scale(1)", "scale(0.84)", "scale(1)"] },
+    { duration: 0.22 },
+  );
+}
+
+function enterRoom(): void {
+  if (reducedMotion()) return;
+  const label = document.querySelector<HTMLElement>(".museum-label");
+  const plinth = document.querySelector<HTMLElement>("#plinth");
+  if (label) {
+    void animate(label, { opacity: [0, 1], transform: ["translateY(-12px)", "translateY(0px)"] }, { duration: 0.7 });
+  }
+  if (plinth) {
+    void animate(plinth, { opacity: [0, 1], transform: ["translateY(28px)", "translateY(0px)"] }, { duration: 0.85 });
+  }
+}
+
 button.addEventListener("click", () => {
   const prev = n;
   n += 1;
@@ -132,6 +155,7 @@ button.addEventListener("click", () => {
   clickSound(Math.max(0, actIdx), n);
   burst(n < 10 ? 6 : n < 100 ? 14 : n < 1000 ? 28 : 48);
   if (n % 50 === 0) shake = Math.min(14, 4 + n / 400);
+  punchFace();
   crossed(prev, n);
   apply();
   if (n === 1 || n % 10 === 0) void pingGlobal();
@@ -179,5 +203,7 @@ document.querySelector("#share-act")!.addEventListener("click", async () => {
   });
 });
 
+bindTilt(button, 11, 18);
+enterRoom();
 apply();
 if (n > 0) void pingGlobal();

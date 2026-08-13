@@ -88,6 +88,24 @@ body.act-os::after {
   pointer-events: none;
 }
 
+.studio-grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  opacity: 0.1;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+}
+
+.studio-vignette {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 35;
+  background: radial-gradient(ellipse at 50% 42%, transparent 42%, color-mix(in srgb, var(--ink) 18%, transparent) 100%);
+}
+
 #field {
   position: fixed;
   inset: 0;
@@ -117,28 +135,47 @@ body.cracked #cracks {
   position: relative;
   z-index: 2;
   padding: 28px 32px 0;
-  max-width: 28rem;
+  max-width: 32rem;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.mark {
+  display: block;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  filter: drop-shadow(0 2px 6px color-mix(in srgb, var(--ink) 18%, transparent));
 }
 
 .accession {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 11px;
-  letter-spacing: 0.18em;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
   color: var(--mute);
-  margin: 0 0 8px;
+  margin: 0 0 10px;
 }
 
 h1 {
   font-weight: 600;
-  font-size: clamp(28px, 4vw, 44px);
-  letter-spacing: 0.08em;
+  font-size: clamp(28px, 4.2vw, 46px);
+  letter-spacing: 0.14em;
   margin: 0;
+  line-height: 0.95;
 }
 
 .sub {
-  margin: 8px 0 0;
+  margin: 10px 0 0;
   color: var(--mute);
   font-style: italic;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
 }
 
 main {
@@ -150,31 +187,89 @@ main {
   padding-bottom: 12vh;
 }
 
+.plinth {
+  perspective: 820px;
+  perspective-origin: 50% 42%;
+  display: grid;
+  place-items: center;
+}
+
 #the-button {
+  --rx: 0deg;
+  --ry: 0deg;
+  --z: 0px;
+  --press: 1;
   width: 120px;
   height: 120px;
+  min-width: 44px;
+  min-height: 44px;
   border: 0;
   border-radius: 999px;
-  background: var(--button);
+  background:
+    radial-gradient(circle at 32% 26%, color-mix(in srgb, var(--face) 38%, var(--button)), transparent 46%),
+    radial-gradient(circle at 50% 62%, var(--button), color-mix(in srgb, var(--button) 62%, #000));
   color: var(--face);
   cursor: pointer;
   box-shadow:
+    inset 0 2px 3px color-mix(in srgb, var(--face) 42%, transparent),
+    inset 0 -14px 22px color-mix(in srgb, #000 38%, transparent),
     0 18px 40px color-mix(in srgb, var(--button) 28%, transparent),
     0 0 0 12px color-mix(in srgb, var(--ink) 6%, transparent),
     0 0 80px var(--glow);
-  transform: translate(var(--shake), 0) scale(var(--press, 1));
-  transition: background 0.6s ease, box-shadow 0.4s ease, width 0.8s ease, height 0.8s ease, border-radius 0.8s ease;
+  transform:
+    translate3d(var(--shake), 0, var(--z))
+    rotateX(var(--rx))
+    rotateY(var(--ry))
+    scale(var(--press));
+  transform-style: preserve-3d;
+  transition:
+    background 0.6s ease,
+    box-shadow 0.4s ease,
+    width 0.8s ease,
+    height 0.8s ease,
+    border-radius 0.8s ease,
+    transform 0.16s ease;
   position: relative;
+  touch-action: manipulation;
+}
+
+#the-button:hover {
+  --z: 14px;
 }
 
 #the-button:active {
-  --press: 0.94;
+  --press: 0.92;
+  --z: 2px;
+}
+
+#the-button .dome,
+#the-button .rim {
+  position: absolute;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+#the-button .dome {
+  inset: 7%;
+  background: radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.58), transparent 44%);
+  mix-blend-mode: soft-light;
+  transform: translateZ(8px);
+}
+
+#the-button .rim {
+  inset: 0;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--face) 22%, transparent),
+    inset 0 0 0 7px color-mix(in srgb, #000 16%, transparent);
 }
 
 #the-button .face {
+  position: relative;
+  z-index: 1;
   font-size: 42px;
   line-height: 1;
   pointer-events: none;
+  transform: translateZ(12px);
 }
 
 #the-button.wide {
@@ -197,7 +292,7 @@ main {
   min-height: 1.4em;
   font-style: italic;
   font-size: 22px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
   text-align: center;
   width: min(90vw, 28rem);
 }
@@ -265,8 +360,17 @@ main {
   border: 1px solid #111;
   background: #111;
   color: #ece9e2;
-  padding: 4px 10px;
+  min-height: 44px;
+  padding: 8px 14px;
   cursor: pointer;
+}
+
+.sys button:hover {
+  filter: brightness(1.12);
+}
+
+.sys button:active {
+  transform: translateY(1px);
 }
 
 .lore {
@@ -301,7 +405,7 @@ main {
 
 .ending-kicker {
   font-family: "IBM Plex Mono", monospace;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   font-size: 11px;
   color: var(--mute);
@@ -309,17 +413,27 @@ main {
 
 .ending-inner h2 {
   font-size: 42px;
+  letter-spacing: -0.02em;
   margin: 8px 0 12px;
 }
 
 .ending-inner button {
   font-family: "IBM Plex Mono", monospace;
   margin: 8px 6px 0;
+  min-height: 44px;
   padding: 10px 16px;
   border: 1px solid var(--ink);
   background: var(--ink);
   color: var(--paper);
   cursor: pointer;
+}
+
+.ending-inner button:hover {
+  filter: brightness(1.08);
+}
+
+.ending-inner button:active {
+  transform: translateY(1px);
 }
 
 .ending-inner .ghost {
@@ -342,6 +456,9 @@ main {
 .webring a {
   color: var(--mute);
   text-decoration: none;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .webring a:hover {
@@ -361,6 +478,9 @@ main {
   .museum-label {
     padding: 20px 18px 0;
   }
+  .whisper {
+    top: calc(50% + 118px);
+  }
   .counter {
     top: auto;
     bottom: 52px;
@@ -369,5 +489,25 @@ main {
   .lore {
     left: 18px;
     bottom: 96px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  #cracks,
+  #the-button,
+  .sys button,
+  .ending-inner button {
+    transition: none;
+  }
+
+  #the-button,
+  #the-button:hover,
+  #the-button:active {
+    --rx: 0deg;
+    --ry: 0deg;
+    --z: 0px;
+    --press: 1;
+    transform: translate(var(--shake), 0);
   }
 }
